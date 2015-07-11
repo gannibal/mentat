@@ -10,6 +10,7 @@ public class Room {
         this.name = name;
     }
 
+
     public String getRoom() {
         return this.name;
     }

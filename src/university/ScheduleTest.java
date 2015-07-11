@@ -2,24 +2,19 @@ package university;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class ScheduleTest {
-    Lecture l;
-    Lecture l1;
+    Lecture firstLecture;
+    Lecture secondLecture;
     Schedule schedule;
 
     @Before
     public void setUp() throws Exception {
-        Long d = 1435738600000L;
-        Long d1 = 1435798600000L;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        String date = sdf.format(d);
-        Room r = new Room("first");
+        Long firstLectureDate= 1435738600000L;
+        Long secondLectureDate = 1435798600000L;
+        Room room = new Room("first");
         ArrayList<Teacher> teachers = new ArrayList<Teacher>();
         Teacher teacher = new Teacher("teacher");
         teachers.add(teacher);
@@ -30,12 +25,12 @@ public class ScheduleTest {
         ArrayList<Group> group = new ArrayList<Group>();
         group.add(new Group("1-a", students));
 
-        l = new Lecture(d, r, teacher, sub, group);
-        l1 = new Lecture(d1, r, teacher, sub, group);
+        firstLecture = new Lecture(firstLectureDate, room, teacher, sub, group);
+        secondLecture = new Lecture(secondLectureDate, room, teacher, sub, group);
 
         ArrayList<Lecture> lectures = new ArrayList<Lecture>();
-        lectures.add(l);
-        lectures.add(l1);
+        lectures.add(firstLecture);
+        lectures.add(secondLecture);
         schedule = new Schedule(lectures);
 
     }
@@ -43,7 +38,7 @@ public class ScheduleTest {
     @Test
     public void testGetDailyLectures() throws Exception {
         ArrayList<Lecture> expected = new ArrayList<Lecture>();
-        expected.add(l);
+        expected.add(firstLecture);
         ArrayList<Lecture> actual = schedule.getDailyLectures(1435738600000L);
         assertEquals(expected, actual);
     }
